@@ -9162,11 +9162,18 @@ bool EntityList::Bot_AICheckCloseBeneficialSpells(Bot* caster, uint8 iChance, fl
 				Group *g = caster->GetGroup();
 				if(g) {
 					for(int i = 0; i < MAX_GROUP_MEMBERS; i++) {
+						// Get Low HP targets first
 						if(g->members[i] && !g->members[i]->qglobal) {
-							if(g->members[i]->IsClient() && g->members[i]->GetHPRatio() < 90) {
+							if(g->members[i]->GetHPRatio() < 50) {
 								if(caster->AICastSpell(g->members[i], 100, SpellType_Heal))
 									return true;
-							} else if((g->members[i]->GetClass() == WARRIOR || g->members[i]->GetClass() == PALADIN || g->members[i]->GetClass() == SHADOWKNIGHT) && g->members[i]->GetHPRatio() < 95) {
+							}
+						}
+					}
+					
+					for(int i = 0; i < MAX_GROUP_MEMBERS; i++) {
+						if(g->members[i] && !g->members[i]->qglobal) {
+ 							if((g->members[i]->GetClass() == WARRIOR || g->members[i]->GetClass() == PALADIN || g->members[i]->GetClass() == SHADOWKNIGHT) && g->members[i]->GetHPRatio() < 95) {
 								if(caster->AICastSpell(g->members[i], 100, SpellType_Heal))
 									return true;
 							} else if(g->members[i]->GetClass() == ENCHANTER && g->members[i]->GetHPRatio() < 80) {

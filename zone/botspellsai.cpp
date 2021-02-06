@@ -128,9 +128,9 @@ bool Bot::AICastSpell(Mob* tar, uint8 iChance, uint32 iSpellTypes) {
 
 					// Evaluate the situation
 					if((IsEngaged()) && ((botClass == CLERIC) || (botClass == DRUID) || (botClass == SHAMAN) || (botClass == PALADIN))) {
-						if(tar->GetTarget() && tar->GetTarget()->GetHateTop() && tar->GetTarget()->GetHateTop() == tar) {
-							hasAggro = true;
-						}
+						// if(tar->GetTarget() && tar->GetTarget()->GetHateTop() && tar->GetTarget()->GetHateTop() == tar) {
+						// 	hasAggro = true;
+						// }
 
 						if(hpr < 35) {
 							botSpell = GetBestBotSpellForFastHeal(this);
@@ -142,17 +142,17 @@ bool Bot::AICastSpell(Mob* tar, uint8 iChance, uint32 iSpellTypes) {
 							if(botSpell.SpellId == 0)
 								botSpell = GetBestBotSpellForPercentageHeal(this);
 						}
-						else if(hpr >= 70 && hpr < 95){
-							if(GetNumberNeedingHealedInGroup(80, false) >= 3)
-								botSpell = GetBestBotSpellForGroupHealOverTime(this);
+						// else if(hpr >= 70 && hpr < 95){
+						// 	if(GetNumberNeedingHealedInGroup(80, false) >= 3)
+						// 		botSpell = GetBestBotSpellForGroupHealOverTime(this);
 
-							if(hasAggro)
-								botSpell = GetBestBotSpellForPercentageHeal(this);
-						}
-						else {
-							if(!tar->FindType(SE_HealOverTime))
-								botSpell = GetBestBotSpellForHealOverTime(this);
-						}
+						// 	if(hasAggro)
+						// 		botSpell = GetBestBotSpellForPercentageHeal(this);
+						// }
+						// else {
+						// 	if(!tar->FindType(SE_HealOverTime))
+						// 		botSpell = GetBestBotSpellForHealOverTime(this);
+						// }
 					}
 					else if ((botClass == CLERIC) || (botClass == DRUID) || (botClass == SHAMAN) || (botClass == PALADIN)) {
 						if(GetNumberNeedingHealedInGroup(40, true) >= 2){
